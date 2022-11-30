@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'dart:convert';
 // import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 
 void main() {
+  getHttp();
   // debugPaintSizeEnabled = true; // Remove to suppress visual layout
   runApp(const MyApp());
 }
 
+void getHttp() async {
+  try {
+    var api = 'https://gateway-biz.aistarfish.net/metis/api/metis/doc/public/detail?docId=V2022052515562227800003380&sign=_lDqDbaEQqw7Px7AhbN-HLiqVmE&signDate=1669812473200';
+    var response = await Dio().get(api);
+    var data= jsonDecode(response.toString());
+    print(data['data']);
+    print(response.statusCode);
+  } catch (e) {
+    print(e);
+  }
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
