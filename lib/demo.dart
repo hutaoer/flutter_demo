@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
     // ScreenUtil.init(context);
     // ScreenUtil.init(context,designSize: Size(750, 1334));
     return ScreenUtilInit(
-      designSize: const Size(375, 667),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context , child) {
@@ -49,53 +49,69 @@ class MyApp extends StatelessWidget {
           ),
           home: Scaffold(
             appBar: AppBar(
-              title: Text('我的消息', style: TextStyle(fontSize: 20.sp),),
+              title: Text('个人中心', style: TextStyle(),),
             ),
             // Change to buildColumn() for the other column example
             // body: Center(child: buildRow()),
             // body: Text('body的内容啊啊啊'),
-            body: ListView(
-              shrinkWrap: true, 
-              padding: const EdgeInsets.all(20.0),
-              children: <Widget>[
-                _buildMsgItem(),
-                _buildMsgItem(),
-                _buildMsgItem(),
-              ],
+            body: Container(
+              width: 375.w,
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                _buildUserInfo(),
+                // _buildUserCertification(),
+                // _buildEntries()
+              ]),
             )
           ),
         );
       },
     );
+
+    // return MaterialApp(
+    //   title: 'Flutter layout demo',
+    //   home: Scaffold(
+    //     appBar: AppBar(
+    //       title: Text('个人中心', style: TextStyle(),),
+    //     ),
+    //     // Change to buildColumn() for the other column example
+    //     // body: Center(child: buildRow()),
+    //     // body: Text('body的内容啊啊啊'),
+    //     body: Container(
+    //       width: ScreenUtil().setWidth(375),
+    //       alignment: Alignment.center,
+    //       child: Column(
+    //         children: [
+    //         _buildUserInfo(),
+    //         _buildUserCertification(),
+    //         _buildEntries()
+    //       ]),
+    //     )
+    //   ),
+    // );
   }
 
-  Widget _buildMsgItem() => Container(
-    height: 187.w,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Text('2020/12/02  12:24:54', style: TextStyle(fontSize: 14.sp, color: Color.fromRGBO(153, 153, 153, 1))),
-        _buildInfo()
-    ]), 
-  );
-
-  Widget _buildInfo() => Container(
-    width: 343.w,
-    height: 137.w,
+  // 我的各种入口
+  Widget _buildEntries() => Container(
+    width: ScreenUtil().setWidth(343.w),
     decoration: BoxDecoration(
-     borderRadius: const BorderRadius.all(Radius.circular(8)).w,
-     color: Color.fromRGBO(255, 255, 255, 1) 
+      color: Colors.white, 
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
     ),
-    child: Column(children: [
-      Text('会面通知', style: TextStyle(color: Color.fromRGBO(60, 60, 60, 1), fontSize: 16.sp)),
-      Container(
-        width: 343.w,
-        height: 38.w,
-        decoration: BoxDecoration(
-          border: Border(top: BorderSide(width: 1.w, color: Color.fromRGBO(153, 153, 153, 1)))
-        ),
-        child: Text('查看详情', style: TextStyle(color: Color.fromRGBO(153, 153, 153, 1)),),
-      )
+    child: Wrap(
+      spacing: 2, //主轴上子控件的间距
+      runSpacing: 5, //交叉轴上子控件之间的间距
+      children: [
+      _buildEntryItem(),
+      _buildEntryItem(),
+      _buildEntryItem(),
+      _buildEntryItem(),
+      _buildEntryItem(),
+      _buildEntryItem(),
+      _buildEntryItem(),
+      _buildEntryItem(),
+      _buildEntryItem(),
     ]),
   );
 
@@ -187,7 +203,7 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _buildUserStuff() => Container(
-    width: ScreenUtil().setWidth(400.w),
+    width: ScreenUtil().setWidth(200 * 2),
     child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
